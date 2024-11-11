@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:53:43 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/11 16:11:33 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/11 23:06:27 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	fill_grid(t_vars *vars)
 	while (line)
 	{
 		allocate_line(vars, g_pos);
-		while (g_pos.px_x < vars.map.g_w)
+		while (g_pos.px_x < vars->map.g_w)
 		{
 			fill_tiles(vars, line, g_pos);
 			count_grid(vars, vars->map.grid[g_pos.px_y][g_pos.px_x], g_pos);
@@ -78,17 +78,17 @@ int	fill_grid(t_vars *vars)
 
 void	fill_tiles(t_vars *vars, char *line, t_point g_pos)
 {
-	vars->map.grid[g_pos->px_y][g_pos->px_x] = line[g_pos.px_x];
-	vars->map.tiles[g_pos->px_y][g_pos->px_x].t = line[g_pos.px_x];
-	vars->map.tiles[g_pos->px_y][g_pos->px_x].v = 0;
+	vars->map.grid[g_pos.px_y][g_pos.px_x] = line[g_pos.px_x];
+	vars->map.tiles[g_pos.px_y][g_pos.px_x].t = line[g_pos.px_x];
+	vars->map.tiles[g_pos.px_y][g_pos.px_x].v = 0;
 	if (unknown_character(vars->map.tiles[g_pos.px_y][g_pos.px_x].t))
 		map_error("Caracter desconocido en el mapa introducido.");
 }
 
-void	allocate_line(t_vars *vars t_point g_pos)
+void	allocate_line(t_vars *vars, t_point g_pos)
 {
-	vars->map.grid[g_pos->px_y] = malloc((vars->map.g_w - 1) * sizeof(char));
-	vars->map.tiles[g_pos->px_y] = malloc((vars->map.g_w - 1) * sizeof(t_tile));
+	vars->map.grid[g_pos.px_y] = malloc((vars->map.g_w - 1) * sizeof(char));
+	vars->map.tiles[g_pos.px_y] = malloc((vars->map.g_w - 1) * sizeof(t_tile));
 }
 
 
@@ -97,7 +97,7 @@ void	allocate_line(t_vars *vars t_point g_pos)
 
 
 
-static int	read_map(const char *filename, char ***map)
+/* static int	read_map(const char *filename, char ***map)
 {
 	int		fd;
 	int		line;
@@ -160,3 +160,4 @@ void	print_and_free_map(char **map)
 	}
 	free(map); // Liberar el arreglo de punteros
 }
+ */

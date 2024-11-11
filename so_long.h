@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:54:55 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/11 16:17:35 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/11 23:06:15 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ void	check_map(t_vars *vars);
 int		walls_error(t_vars *vars);
 int		unknown_character(int c);
 void	initiate_map_filling(t_vars *vars, t_point *p);
+
+// path_checker.c
+void	check_path(t_point p, t_vars *vars);
 
 
 #endif

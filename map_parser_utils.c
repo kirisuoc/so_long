@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:06:18 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/11 14:56:24 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/11 23:07:25 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	check_map(t_vars *vars)
 	if (vars->exit_found <= 0)
 		map_error("Casilla de meta no encontrada.");
 	if (vars->collectibles <= 0)
-		map_error("Ningún coleccionable encontrado en el mapa."):
+		map_error("Ningún coleccionable encontrado en el mapa.");
 	if (vars->start_found <= 0)
 		map_error("Casilla de salida no encontrada.");
 	if (!vars->map.exit_accessible)
@@ -81,7 +81,7 @@ int	unknown_character(int c)
 
 void	initiate_map_filling(t_vars *vars, t_point *p)
 {
-	vars->fd = open(vars->map.path, O_RDONLY);
+	vars->map.fd = open(vars->map.path, O_RDONLY);
 	vars->map.grid = malloc(vars->map.g_h *sizeof(char *));
 	vars->map.tiles = malloc(vars->map.g_h * sizeof(t_tile *));
 	p->px_x = 0;

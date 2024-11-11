@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:48:20 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/11 15:03:42 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/11 22:58:46 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ size_t	ft_linelen(char *s)
 	int	len;
 
 	len = 0;
-	while (s[i] && s[i] != '\n')
+	while (s[len] && s[len] != '\n')
 		len++;
 	return (len);
 }
@@ -54,7 +54,7 @@ int	check_map_name(char *s)
 	size_t	l;
 
 	l = ft_strlen(s) - 1;
-	if (s[l] = 'r' && s[l - 1] == 'e' && s[l - 2] == 'b' && s[l - 3] == '.')
+	if (s[l] == 'r' && s[l - 1] == 'e' && s[l - 2] == 'b' && s[l - 3] == '.')
 		return (0);
 	return (1);
 }
