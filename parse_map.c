@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:53:43 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/11 12:53:15 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:11:33 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	parse_map(t_map *map)
 
 	fd = open(map->path, O_RDONLY);
 	if (fd < 0)
-		map_error(Mapa no encontrado.);
+		map_error("Mapa no encontrado.");
 	map->g_h = 0;
 	map->g_w = 0;
 	line = get_next_line(fd);
@@ -70,9 +70,6 @@ int	fill_grid(t_vars *vars)
 	close(vars->map.fd);
 	if (walls_error(vars))
 		map_error("El mapa no no está rodeado por muros.");
-
-
-	// AQUI
 	check_path(vars->player.pos, vars);
 	check_map(vars);
 	return (1);
@@ -88,11 +85,15 @@ void	fill_tiles(t_vars *vars, char *line, t_point g_pos)
 		map_error("Caracter desconocido en el mapa introducido.");
 }
 
-void	allocate_line(t_vars *vars, char *line, t_point g_pos)
+void	allocate_line(t_vars *vars t_point g_pos)
 {
 	vars->map.grid[g_pos->px_y] = malloc((vars->map.g_w - 1) * sizeof(char));
 	vars->map.tiles[g_pos->px_y] = malloc((vars->map.g_w - 1) * sizeof(t_tile));
 }
+
+
+
+
 
 
 

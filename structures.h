@@ -6,12 +6,14 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:42:41 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/11 12:00:09 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:08:44 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+# include "so_long.h"
 
 typedef struct	s_point
 {
@@ -46,7 +48,7 @@ typedef struct	s_map
 	size_t	g_w;
 	char	**grid;
 	t_tile	**tiles;
-	int		exit_accesible;
+	int		exit_accessible;
 	int		fd;
 	int		accessible_collectibles;
 }				t_map;
@@ -78,4 +80,4 @@ typedef struct	s_vars
 	int			endian;
 }				t_vars;
 
-#ifndef
+#endif

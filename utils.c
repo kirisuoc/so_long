@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:48:20 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/11 12:08:20 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:03:42 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,14 @@ size_t	ft_linelen(char *s)
 	while (s[i] && s[i] != '\n')
 		len++;
 	return (len);
+}
+
+int	check_map_name(char *s)
+{
+	size_t	l;
+
+	l = ft_strlen(s) - 1;
+	if (s[l] = 'r' && s[l - 1] == 'e' && s[l - 2] == 'b' && s[l - 3] == '.')
+		return (0);
+	return (1);
 }
