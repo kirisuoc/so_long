@@ -6,7 +6,7 @@
 /*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:54:55 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 13:21:11 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/12 13:49:49 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@
 # include <stdio.h>
 
 // utils.c
-int		open_file(const char *filename);
+int		close_window(t_vars *vars);
+int 	key_handler(int keycode, t_vars *vars);
 size_t	ft_linelen(char *s);
 int		check_map_name(char *s);
 

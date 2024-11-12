@@ -6,36 +6,23 @@
 /*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:48:20 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 13:23:43 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/12 13:38:23 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	open_file(const char *filename)
+int	close_window(t_vars *vars)
 {
-	int	fd;
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Error al abrir el archivo");
-		exit(EXIT_FAILURE);
-	}
-	return (fd);
+	mlx_destroy_window(vars->mlx, vars->win);
+	exit(0);
 }
 
-char	**allocate_memory(size_t size, char *error_message)
+int key_handler(int keycode, t_vars *vars)
 {
-	char	**ptr;
-
-	ptr = malloc(size);
-	if (!ptr)
-	{
-		perror(error_message);
-		exit(EXIT_FAILURE);
-	}
-	return (ptr);
+	if (keycode == 53 || keycode == 65307)
+		close_window(vars);
+	return (0);
 }
 
 size_t	ft_linelen(char *s)
