@@ -6,7 +6,7 @@
 /*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:54:55 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 11:12:37 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/12 13:21:11 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@
 # define START 'P'
 # define EXIT 'E'
 # define COLLECT 'C'
-# ifndef size
-#	define SIZE 50
+# ifndef SIZE
+#  define SIZE 50
 # endif
 # define BOOL short int
 # define TRUE 1
 # define FALSE 0
-
 
 # include "mlx.h"
 # include "libftprintf.h"
@@ -39,10 +38,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-
 // utils.c
 int		open_file(const char *filename);
-//char	**allocate_memory(size_t size, char *error_message);
 size_t	ft_linelen(char *s);
 int		check_map_name(char *s);
 
@@ -50,8 +47,6 @@ int		check_map_name(char *s);
 void	map_is_valid(char **map);
 
 // parse_map.c
-	//void	read_and_validate_map(const char *filename, char ***map);
-	//void	print_and_free_map(char **map);
 void	map_error(char *s);
 int		parse_map(t_map *map);
 int		fill_grid(t_vars *vars);
@@ -73,6 +68,5 @@ void	free_tiles(t_vars *vars);
 
 // init_game.c
 void	init_game(t_vars *vars, char *map_path);
-
 
 #endif

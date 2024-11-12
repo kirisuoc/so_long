@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:42:41 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/11 16:08:44 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/12 13:22:08 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,33 @@
 
 # include "so_long.h"
 
-typedef struct	s_point
+typedef struct s_point
 {
 	size_t	px_x;
 	size_t	px_y;
 }				t_point;
 
-typedef struct	s_sprite
+typedef struct s_sprite
 {
 	int		px_w;
 	int		px_h;
 	void	*img;
 }				t_sprite;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	t_point		pos;
 	t_point		start_pos;
 	t_sprite	sprite;
 }				t_player;
 
-typedef struct	s_tile
+typedef struct s_tile
 {
 	char	t;
 	int		v;
 }				t_tile;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char	*path;
 	size_t	g_h;
@@ -53,7 +53,7 @@ typedef struct	s_map
 	int		accessible_collectibles;
 }				t_map;
 
-typedef struct	s_vars
+typedef struct s_vars
 {
 	void		*mlx;
 	void		*win;

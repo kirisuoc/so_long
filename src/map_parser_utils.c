@@ -6,7 +6,7 @@
 /*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:06:18 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 11:40:32 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/12 13:05:43 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	unknown_character(int c)
 void	initiate_map_filling(t_vars *vars, t_point *p)
 {
 	vars->map.fd = open(vars->map.path, O_RDONLY);
-	vars->map.grid = malloc(vars->map.g_h *sizeof(char *));
+	vars->map.grid = malloc(vars->map.g_h * sizeof(char *));
 	vars->map.tiles = malloc(vars->map.g_h * sizeof(t_tile *));
 	p->px_x = 0;
 	p->px_y = 0;

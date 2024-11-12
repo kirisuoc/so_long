@@ -6,12 +6,11 @@
 /*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:48:20 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 11:02:01 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/12 13:23:43 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 int	open_file(const char *filename)
 {
