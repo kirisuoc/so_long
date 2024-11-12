@@ -6,7 +6,7 @@
 /*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:06:18 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/11 23:07:25 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/12 11:40:32 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	count_grid(t_vars *vars, char c, t_point p)
 		vars->player.start_pos = p;
 	}
 	else if (vars->map.grid[p.px_y][p.px_x] == EXIT)
-		vars.exit_found++;
+		vars->exit_found++;
 	else if (vars->map.grid[p.px_y][p.px_x] == COLLECT)
-		vars.collectibles++;
+		vars->collectibles++;
 }
 
 void	check_map(t_vars *vars)
@@ -74,7 +74,7 @@ int	walls_error(t_vars *vars)
 
 int	unknown_character(int c)
 {
-	if (c != COLLECT || c != START || c != EXIT || c != WALL)
+	if (c != COLLECT && c != START && c != EXIT && c != WALL && c != FLOOR)
 		return (1);
 	return (0);
 }

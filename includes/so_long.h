@@ -6,7 +6,7 @@
 /*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:54:55 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/11 23:06:15 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/12 11:12:37 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@
 # define FALSE 0
 
 
-# include "minilibx/mlx.h"
-# include "libft/libft.h"
-# include "libft/libftprintf.h"
-# include "libft/get_next_line.h"
+# include "mlx.h"
+# include "libftprintf.h"
+# include "get_next_line.h"
 # include "structures.h"
 # include <fcntl.h>
 # include <unistd.h>
@@ -68,6 +67,12 @@ void	initiate_map_filling(t_vars *vars, t_point *p);
 
 // path_checker.c
 void	check_path(t_point p, t_vars *vars);
+
+// free_tiles.c
+void	free_tiles(t_vars *vars);
+
+// init_game.c
+void	init_game(t_vars *vars, char *map_path);
 
 
 #endif

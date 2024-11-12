@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:30:07 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/11 15:12:06 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:11:41 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ void	check_valid_path(char **map)
 */
 
 
-int	main(int ac, void **av)
+int	main(int ac, char **av)
 {
 	t_vars	vars;
 
 	if (ac == 1)
-		map_error("No se especificó ningún mapa."));
+		map_error("No se especificó ningún mapa.");
 	else if (ac > 2)
 		map_error("Demasiados argumentos.");
 	else if (ac == 2 && check_map_name(av[1]))
 		map_error("Extensión de archivo del mapa incorrecta.");
-	// init_game(&vars, av[1]);
+	init_game(&vars, av[1]);
 	parse_map(&vars.map);
 	fill_grid(&vars);
 	free_tiles(&vars);

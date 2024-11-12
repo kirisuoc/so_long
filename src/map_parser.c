@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:53:43 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/11 23:06:27 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/12 11:46:11 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	map_error(char *s)
 
 int	parse_map(t_map *map)
 {
-	int	fd;
+	int		fd;
 	char	*line;
 
 	fd = open(map->path, O_RDONLY);
@@ -32,15 +32,17 @@ int	parse_map(t_map *map)
 	map->g_h = 0;
 	map->g_w = 0;
 	line = get_next_line(fd);
-	while (line)
+	while (line && ft_linelen(line) != 0)
 	{
 		map->g_h++;
 		if (map->g_h == 1)
 			map->g_w = ft_linelen(line);
 		if (ft_linelen(line) != map->g_w)
 			map_error("El mapa no es rectangular.");
+		//free(line);
 		line = get_next_line(fd);
 	}
+	//free(line);
 	close(fd);
 	if (map->g_h == 0)
 		map_error("Mapa vacio.");
@@ -54,7 +56,7 @@ int	fill_grid(t_vars *vars)
 
 	initiate_map_filling(vars, &g_pos);
 	line = get_next_line(vars->map.fd);
-	while (line)
+	while (line && ft_linelen(line) != 0)
 	{
 		allocate_line(vars, g_pos);
 		while (g_pos.px_x < vars->map.g_w)
@@ -69,7 +71,7 @@ int	fill_grid(t_vars *vars)
 	}
 	close(vars->map.fd);
 	if (walls_error(vars))
-		map_error("El mapa no no está rodeado por muros.");
+		map_error("El mapa no está rodeado por muros.");
 	check_path(vars->player.pos, vars);
 	check_map(vars);
 	return (1);
