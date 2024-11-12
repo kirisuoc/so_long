@@ -6,7 +6,7 @@
 /*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:54:55 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 13:49:49 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/12 18:02:39 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,13 @@ void	free_tiles(t_vars *vars);
 
 // init_game.c
 void	init_game(t_vars *vars, char *map_path);
+int	load_sprite(t_vars *vars, t_sprite *sprite, char *file_path);
+
+// draw_background.c
+void	draw_background(t_vars *vars);
+void	draw_map(t_vars *vars);
+void	draw_player(t_vars *vars);
+void	put_sp(t_vars *vars, t_point s, char t);
+
 
 #endif

@@ -6,18 +6,22 @@
 /*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:30:07 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/12 14:33:10 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/12 19:10:57 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 void	display_values(t_vars *vars);
-void print_variables(t_vars *vars);
+void	print_variables(t_vars *vars);
+void	handle_sigtstp(int sig);
 
 int	main(int ac, char **av)
 {
 	t_vars	vars;
+
+	// Configurar la señal SIGTSTP para manejar CTRL+Z
+	signal(SIGTSTP, handle_sigtstp);
 
 	if (ac == 1)
 		map_error("No se especificó ningún mapa.");
@@ -34,11 +38,44 @@ int	main(int ac, char **av)
  	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, vars.map.g_w * SIZE, vars.map.g_h * SIZE, WIN_NAME);
 
+	if (load_sprite(&vars, &vars.f_sp, "img/f_sp.xpm"))
+	{
+		// Manejo del error si la imagen no se carga
+		exit(1);
+	}
+	if (load_sprite(&vars, &vars.w_sp, "img/w_sp.xpm"))
+	{
+		// Manejo del error si la imagen no se carga
+		exit(1);
+	}
+	if (load_sprite(&vars, &vars.p_sp, "img/extras/pikachu.xpm"))
+	{
+		// Manejo del error si la imagen no se carga
+		exit(1);
+	}
+	if (load_sprite(&vars, &vars.s_sp, "img/s_sp.xpm"))
+	{
+		// Manejo del error si la imagen no se carga
+		exit(1);
+	}
+	if (load_sprite(&vars, &vars.e_sp, "img/e_sp.xpm"))
+	{
+		// Manejo del error si la imagen no se carga
+		exit(1);
+	}
+	if (load_sprite(&vars, &vars.c_sp, "img/c_sp.xpm"))
+	{
+		// Manejo del error si la imagen no se carga
+		exit(1);
+	}
 
-
+	draw_background(&vars);
+	draw_map(&vars);
+	draw_player(&vars);
 
 	display_values(&vars);
 	print_variables(&vars);
+
 
 
 
@@ -102,4 +139,13 @@ void print_variables(t_vars *vars) {
     printf("Line length: %d\n", vars->line_length);
     printf("Endian: %d\n", vars->endian);
     printf("Won: %d\n", vars->won);
+}
+
+
+void	handle_sigtstp(int sig)
+{
+	(void)sig; // Para que no se genere un warning sobre el parámetro no usado
+	ft_printf("Programa detenido con CTRL+Z. Cerrando ventana...\n");
+	// Aquí puedes hacer una limpieza si es necesario antes de finalizar
+	exit(0); // Salir del programa correctamente
 }

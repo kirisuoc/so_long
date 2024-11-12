@@ -1,5 +1,5 @@
 NAME = so_long
-SRC = $(addprefix src/, main.c init_game.c utils.c map_parser.c path_checker.c map_parser_utils.c free.c)
+SRC = $(addprefix src/, main.c init_game.c utils.c map_parser.c path_checker.c map_parser_utils.c draw.c free.c)
 GNL_SRC = $(addprefix gnl/, get_next_line.c get_next_line_utils.c)
 PRINTF_SRC = $(addprefix ft_printf/, ft_printf.c aux_functions.c manage_specifiers.c parse_format.c put_functions.c utils.c)
 OBJ := $(SRC:%.c=%.o)
