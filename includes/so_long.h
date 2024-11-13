@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
+/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:54:55 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 18:02:39 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/13 13:36:52 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <signal.h>
+
+// main.c
+int	render(t_vars *vars);
 
 // utils.c
 int		close_window(t_vars *vars);
@@ -66,16 +70,20 @@ void	check_path(t_point p, t_vars *vars);
 
 // free_tiles.c
 void	free_tiles(t_vars *vars);
+void	free_map(t_vars *vars);
 
-// init_game.c
+// game_utils.c
 void	init_game(t_vars *vars, char *map_path);
-int	load_sprite(t_vars *vars, t_sprite *sprite, char *file_path);
+int		load_sprite(t_vars *vars, t_sprite *sprite, char *file_path);
+void	update_player_position(t_vars *vars, t_point np);
 
 // draw_background.c
 void	draw_background(t_vars *vars);
 void	draw_map(t_vars *vars);
 void	draw_player(t_vars *vars);
 void	put_sp(t_vars *vars, t_point s, char t);
+void	load_map_sprites(t_vars *vars);
+void	load_sprites(t_vars *vars);
 
 
 #endif

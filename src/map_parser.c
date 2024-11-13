@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
+/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:53:43 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 13:22:45 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/13 11:58:46 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	parse_map(t_map *map)
 			map->g_w = ft_linelen(line);
 		if (ft_linelen(line) != map->g_w)
 			map_error("El mapa no es rectangular.");
-		//free(line);
+		free(line);
 		line = get_next_line(fd);
 	}
-	//free(line);
+	free(line);
 	close(fd);
 	if (map->g_h == 0)
 		map_error("Mapa vacio.");
@@ -66,8 +66,10 @@ int	fill_grid(t_vars *vars)
 		}
 		g_pos.px_x = 0;
 		g_pos.px_y++;
+		free(line);
 		line = get_next_line(vars->map.fd);
 	}
+	free(line);
 	close(vars->map.fd);
 	if (walls_error(vars))
 		map_error("El mapa no está rodeado por muros.");
@@ -87,6 +89,6 @@ void	fill_tiles(t_vars *vars, char *line, t_point g_pos)
 
 void	allocate_line(t_vars *vars, t_point g_pos)
 {
-	vars->map.grid[g_pos.px_y] = malloc((vars->map.g_w - 1) * sizeof(char));
-	vars->map.tiles[g_pos.px_y] = malloc((vars->map.g_w - 1) * sizeof(t_tile));
+	vars->map.grid[g_pos.px_y] = malloc((vars->map.g_w + 1) * sizeof(char));
+	vars->map.tiles[g_pos.px_y] = malloc((vars->map.g_w) * sizeof(t_tile));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
+/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:06:18 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 13:05:43 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/13 11:53:30 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

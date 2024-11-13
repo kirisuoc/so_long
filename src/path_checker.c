@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
+/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:51:49 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 13:25:05 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/13 10:57:07 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	check_path(t_point p, t_vars *vars)
 	g_h = vars->map.g_h;
 	if (vars->map.grid[p.px_y][p.px_x] == WALL || \
 			vars->map.tiles[p.px_y][p.px_x].v == 1 || \
-			p.px_x < 0 || p.px_y < 0 || p.px_x > g_w || \
-			p.px_y > g_h)
+			p.px_x > g_w || p.px_y > g_h)
+			/*p.px_x < 0 || p.px_y < 0*/
 		return ;
 	vars->map.tiles[p.px_y][p.px_x].v = 1;
 	if (vars->map.grid[p.px_y][p.px_x] == EXIT)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
+/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:30:07 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/12 19:10:57 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/13 15:24:00 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,55 +38,43 @@ int	main(int ac, char **av)
  	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, vars.map.g_w * SIZE, vars.map.g_h * SIZE, WIN_NAME);
 
-	if (load_sprite(&vars, &vars.f_sp, "img/f_sp.xpm"))
-	{
-		// Manejo del error si la imagen no se carga
-		exit(1);
-	}
-	if (load_sprite(&vars, &vars.w_sp, "img/w_sp.xpm"))
-	{
-		// Manejo del error si la imagen no se carga
-		exit(1);
-	}
-	if (load_sprite(&vars, &vars.p_sp, "img/extras/pikachu.xpm"))
-	{
-		// Manejo del error si la imagen no se carga
-		exit(1);
-	}
-	if (load_sprite(&vars, &vars.s_sp, "img/s_sp.xpm"))
-	{
-		// Manejo del error si la imagen no se carga
-		exit(1);
-	}
-	if (load_sprite(&vars, &vars.e_sp, "img/e_sp.xpm"))
-	{
-		// Manejo del error si la imagen no se carga
-		exit(1);
-	}
-	if (load_sprite(&vars, &vars.c_sp, "img/c_sp.xpm"))
-	{
-		// Manejo del error si la imagen no se carga
-		exit(1);
-	}
+	// Inicializar la imagen en memoria con el tamaño de la ventana
+	vars.img = mlx_new_image(vars.mlx, vars.map.g_w * SIZE, vars.map.g_h * SIZE);
 
-	draw_background(&vars);
-	draw_map(&vars);
-	draw_player(&vars);
+	// Obtener la dirección de los datos de la imagen en memoria
+	vars.addr = mlx_get_data_addr(vars.img, &vars.bits_per_pixel, &vars.line_length, &vars.endian);
+
+	load_sprites(&vars);
 
 	display_values(&vars);
 	print_variables(&vars);
 
 
-
-
 	mlx_hook(vars.win, 17, 1L << 0, close_window, &vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_handler, &vars);
+	mlx_loop_hook(vars.mlx, render, &vars);
 
 	mlx_loop(vars.mlx);
+	//free_map(&vars); ??
 	return (0);
 }
 
+int	render(t_vars *vars)
+{
+	draw_background(vars);
+	if (!vars->won)
+	{
+		draw_map(vars);
+		draw_player(vars);
+		// draw_moves(vars);
+	}
+/* 	else
+	{
 
+	} */
+	usleep(100000);
+	return (0);
+}
 // Suponiendo que tienes una función en la que quieras mostrar los valores, por ejemplo, en un bucle principal.
 
 void	display_values(t_vars *vars)
@@ -95,7 +83,6 @@ void	display_values(t_vars *vars)
 
 	// Muestra las coordenadas del jugador
 	snprintf(str, sizeof(str), "Player position: (%zu, %zu)", vars->player.pos.px_x, vars->player.pos.px_y);
-	ft_printf("Player position: (%zu, %zu)", vars->player.pos.px_x, vars->player.pos.px_y);
 	mlx_string_put(vars->mlx, vars->win, 10, 10, 0xFFFFFF, str); // Posición (10, 10) de la ventana, color blanco
 
 	// Muestra el número de movimientos

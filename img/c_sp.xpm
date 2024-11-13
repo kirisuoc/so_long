@@ -2,7 +2,7 @@
 static char *_collectible[] = {
 /* columns rows colors chars-per-pixel */
 "50 50 5 1 ",
-"  c None",
+"  c #81663F",
 ". c black",
 "X c #D47636",
 "o c #FBAF3C",

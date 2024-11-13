@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
+/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:38:02 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/12 18:28:02 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/13 11:39:40 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	draw_map(t_vars *vars)
 	{
 		while (s.px_x < vars->map.g_w * SIZE)
 		{
-			ft_printf("Valor en [%d, %d]: %c\n", s.px_y / SIZE, s.px_x / SIZE, vars->map.grid[s.px_y / SIZE][s.px_x / SIZE]);
-
 			if (vars->map.grid[s.px_y / SIZE][s.px_x / SIZE] == WALL)
 				put_sp(vars, s, WALL);
 			else if (vars->map.grid[s.px_y / SIZE][s.px_x / SIZE] == COLLECT)
