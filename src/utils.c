@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:48:20 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/13 13:17:44 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:33:18 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int key_handler(int keycode, t_vars *vars)
 {
 	if (keycode == 53 || keycode == 65307)
 		close_window(vars);
-	else if((keycode == 2 || keycode == 124) && !vars->won)
+	else if((keycode == 2 || keycode == 124 || keycode == 65363) && !vars->won)
 		update_player_position(vars, (t_point){vars->player.pos.px_x + 1, vars->player.pos.px_y});
-	else if((keycode == 0 || keycode == 123) && !vars->won)
+	else if((keycode == 0 || keycode == 123 || keycode == 65361) && !vars->won)
 		update_player_position(vars, (t_point){vars->player.pos.px_x - 1, vars->player.pos.px_y});
-	else if((keycode == 13 || keycode == 126) && !vars->won)
+	else if((keycode == 13 || keycode == 126 || keycode == 65362) && !vars->won)
 		update_player_position(vars, (t_point){vars->player.pos.px_x, vars->player.pos.px_y - 1});
-	else if((keycode == 1 || keycode == 125) && !vars->won)
+	else if((keycode == 1 || keycode == 125 || keycode == 65364) && !vars->won)
 		update_player_position(vars, (t_point){vars->player.pos.px_x, vars->player.pos.px_y + 1});
 	return (0);
 }

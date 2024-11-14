@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:38:02 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/13 11:39:40 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:05:20 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	draw_background(t_vars *vars)
 		s.px_y += SIZE;
 	}
 }
+
 
 void	draw_player(t_vars *vars)
 {
@@ -80,3 +81,16 @@ void	put_sp(t_vars *vars, t_point s, char t)
 	else if (t == FLOOR)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->f_sp.img, s.px_x, s.px_y);
 }
+
+/* void	draw_moves(t_vars *vars)
+{
+	int	h;
+	int	t;
+	int	u;
+
+	h = (vars->moves / 100);
+	t = (vars->moves / 10) % 10;
+	u = ((vars->moves % 100) % 10);
+
+	// Terminar
+} */

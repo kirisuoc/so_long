@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:05:53 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/13 15:30:31 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/14 13:05:22 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void	update_player_position(t_vars *vars, t_point np)
 			vars->collected++;
 			vars->map.grid[np.px_y][np.px_x] = FLOOR;
 			if (vars->collected == vars->collectibles)
+			{
 				vars->exit_unlocked = TRUE;
+				vars->e_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/e_sp_unlocked.xpm", &vars->f_sp.px_w, &vars->f_sp.px_h);
+			}
 			vars->player.pos = np;
 		}
 		else if (vars->map.grid[np.px_y][np.px_x] == EXIT && vars->exit_unlocked)
@@ -71,7 +74,9 @@ void	update_player_position(t_vars *vars, t_point np)
 			vars->player.pos = np;
 			vars->won = TRUE;
 		}
-		else if (vars->map.grid[np.px_y][np.px_x] == WALL)
+		else if (vars->map.grid[np.px_y][np.px_x] == FLOOR)
 			vars->player.pos = np;
+		else if (vars->map.grid[np.px_y][np.px_x] == WALL)
+			vars->player.pos = vars->player.pos;
 	}
 }

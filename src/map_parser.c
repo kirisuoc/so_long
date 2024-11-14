@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:53:43 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/13 11:58:46 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:45:22 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	fill_grid(t_vars *vars)
 		while (g_pos.px_x < vars->map.g_w)
 		{
 			fill_tiles(vars, line, g_pos);
+
 			count_grid(vars, vars->map.grid[g_pos.px_y][g_pos.px_x], g_pos);
 			g_pos.px_x++;
 		}

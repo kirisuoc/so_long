@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:06:18 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/13 11:53:30 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:54:21 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ void	count_grid(t_vars *vars, char c, t_point p)
 		vars->start_found++;
 		vars->player.pos = p;
 		vars->player.start_pos = p;
+		printf("Player positionnn: (%zu, %zu)\n", vars->player.pos.px_x, vars->player.pos.px_y);
 	}
-	else if (vars->map.grid[p.px_y][p.px_x] == EXIT)
+	else if (c == EXIT)
 		vars->exit_found++;
-	else if (vars->map.grid[p.px_y][p.px_x] == COLLECT)
+	else if (c == COLLECT)
 		vars->collectibles++;
 }
 

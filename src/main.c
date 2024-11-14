@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:30:07 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/13 15:24:00 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:59:49 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	main(int ac, char **av)
 
 	load_sprites(&vars);
 
-	display_values(&vars);
-	print_variables(&vars);
+
+
 
 
 	mlx_hook(vars.win, 17, 1L << 0, close_window, &vars);
@@ -55,6 +55,9 @@ int	main(int ac, char **av)
 	mlx_loop_hook(vars.mlx, render, &vars);
 
 	mlx_loop(vars.mlx);
+	//mlx_destroy_image(vars.mlx, vars.img);
+	//mlx_destroy_window(vars.mlx, vars.win);
+
 	//free_map(&vars); ??
 	return (0);
 }
@@ -72,7 +75,7 @@ int	render(t_vars *vars)
 	{
 
 	} */
-	usleep(100000);
+
 	return (0);
 }
 // Suponiendo que tienes una función en la que quieras mostrar los valores, por ejemplo, en un bucle principal.
