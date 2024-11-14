@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:06:18 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/14 12:54:21 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/14 21:40:16 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	count_grid(t_vars *vars, char c, t_point p)
 		vars->start_found++;
 		vars->player.pos = p;
 		vars->player.start_pos = p;
-		printf("Player positionnn: (%zu, %zu)\n", vars->player.pos.px_x, vars->player.pos.px_y);
 	}
 	else if (c == EXIT)
 		vars->exit_found++;
