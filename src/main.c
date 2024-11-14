@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:30:07 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/14 12:59:49 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:38:18 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ int	main(int ac, char **av)
 	vars.addr = mlx_get_data_addr(vars.img, &vars.bits_per_pixel, &vars.line_length, &vars.endian);
 
 	load_sprites(&vars);
-
+	draw_background(&vars);
+	draw_map(&vars);
+	draw_player(&vars);
 
 
 
@@ -64,72 +66,25 @@ int	main(int ac, char **av)
 
 int	render(t_vars *vars)
 {
-	draw_background(vars);
-	if (!vars->won)
+	if (vars->needs_update)
 	{
-		draw_map(vars);
-		draw_player(vars);
-		// draw_moves(vars);
+		draw_background(vars);
+		if (!vars->won)
+		{
+			draw_map(vars);
+			draw_player(vars);
+			// draw_moves(vars);
+		}
+	 	else
+		{
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->yw_sp.img, (vars->map.g_w * SIZE - 150) / 2, (vars->map.g_h * SIZE - 150) / 2);
+		}
+		vars->needs_update = 0;
 	}
-/* 	else
-	{
-
-	} */
 
 	return (0);
 }
 // Suponiendo que tienes una función en la que quieras mostrar los valores, por ejemplo, en un bucle principal.
-
-void	display_values(t_vars *vars)
-{
-	char	str[50];
-
-	// Muestra las coordenadas del jugador
-	snprintf(str, sizeof(str), "Player position: (%zu, %zu)", vars->player.pos.px_x, vars->player.pos.px_y);
-	mlx_string_put(vars->mlx, vars->win, 10, 10, 0xFFFFFF, str); // Posición (10, 10) de la ventana, color blanco
-
-	// Muestra el número de movimientos
-	snprintf(str, sizeof(str), "Moves: %d", vars->moves);
-	mlx_string_put(vars->mlx, vars->win, 10, 30, 0xFFFFFF, str);
-
-	// Muestra el estado de los collectibles
-	snprintf(str, sizeof(str), "Collected: %d/%d", vars->collected, vars->collectibles);
-	mlx_string_put(vars->mlx, vars->win, 10, 50, 0xFFFFFF, str);
-
-	// Muestra el estado de la exit (si está desbloqueada o no)
-	snprintf(str, sizeof(str), "Exit %s", vars->exit_unlocked ? "Unlocked" : "Locked");
-	mlx_string_put(vars->mlx, vars->win, 10, 100, 0xFFFFFF, str);
-}
-
-void print_variables(t_vars *vars) {
-
-	ft_printf("\n");
-    // Imprimir datos del jugador
-    printf("Player position: (%zu, %zu)\n", vars->player.pos.px_x, vars->player.pos.px_y);
-    printf("Start position: (%zu, %zu)\n", vars->player.start_pos.px_x, vars->player.start_pos.px_y);
-    printf("Player sprite size: (%d, %d)\n", vars->player.sprite.px_w, vars->player.sprite.px_h);
-
-    // Imprimir datos del mapa
-    printf("Map path: %s\n", vars->map.path);
-    printf("Map dimensions: (%zu, %zu)\n", vars->map.g_h, vars->map.g_w);
-    printf("Exit accessible: %d\n", vars->map.exit_accessible);
-    printf("Collectibles accessible: %d\n", vars->map.accessible_collectibles);
-
-    // Imprimir datos de tiles
-    //         printf("Tile [0][0]: %c, Value: %d\n", vars->map.tiles[0][0].t, vars->map.tiles[0][0].v);
-
-    // Imprimir otros valores
-    printf("Moves: %d\n", vars->moves);
-    printf("Collected: %d\n", vars->collected);
-    printf("Total collectibles: %d\n", vars->collectibles);
-    printf("Exit unlocked: %d\n", vars->exit_unlocked);
-    printf("Exit found: %d\n", vars->exit_found);
-    printf("Start found: %d\n", vars->start_found);
-    printf("Bits per pixel: %d\n", vars->bits_per_pixel);
-    printf("Line length: %d\n", vars->line_length);
-    printf("Endian: %d\n", vars->endian);
-    printf("Won: %d\n", vars->won);
-}
 
 
 void	handle_sigtstp(int sig)

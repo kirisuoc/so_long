@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
+/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:42:41 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 13:22:08 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/14 13:40:57 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_vars
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			needs_update;
 }				t_vars;
 
 #endif
