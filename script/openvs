@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Verifica si el usuario ha proporcionado un argumento
+if [ -z "$1" ]; then
+  echo "Por favor, proporciona el nombre del directorio a buscar."
+  exit 1
+fi
+
+# Directorio a buscar
+DIR_NAME="$1"
+
+# Busca el directorio en el directorio actual y sus subdirectorios
+DIRECTORY_PATH=$(find . -type d -name "$DIR_NAME" -print -quit)
+
+# Verifica si el directorio fue encontrado
+if [ -z "$DIRECTORY_PATH" ]; then
+  echo "El directorio '$DIR_NAME' no fue encontrado."
+  exit 1
+fi
+
+# Abre el directorio con Visual Studio Code
+code "$DIRECTORY_PATH"
+
+

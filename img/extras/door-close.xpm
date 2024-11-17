@@ -1,8 +1,8 @@
 /* XPM */
 static char *_0350228eaf84d1afdb5be078d8ddfeeV5WsOeoydmTiif2p[] = {
 /* columns rows colors chars-per-pixel */
-"46 48 134 2 ",
-"   c #AC8C3E",
+"46 50 134 2 ",
+"   c None",
 ".  c #202020",
 "X  c #4B4F52",
 "o  c #981000",
@@ -137,6 +137,8 @@ static char *_0350228eaf84d1afdb5be078d8ddfeeV5WsOeoydmTiif2p[] = {
 "d. c #FEFFFF",
 "f. c white",
 /* pixels */
+"                                                                                            ",
+"                                                                                            ",
 "              o % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % o               ",
 "            o % % % % % = = = = = = = = = = = = = = = = = = = = % % % % % % % o             ",
 "            o % % % % = : : : : : : : : : : : : : : : : : : : : = = = % % % % o             ",
