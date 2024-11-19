@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:05:53 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/14 15:44:43 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:54:51 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	load_map_sprites(t_vars *vars)
 	vars->p_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/extras/pikachu.xpm", &vars->p_sp.px_w, &vars->p_sp.px_h);
 	if (!vars->p_sp.img)
 		map_error("Error al cargar el sprite de Pikachu.");
-	vars->f_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/f_sp.xpm", &vars->f_sp.px_w, &vars->f_sp.px_h);
+	vars->f_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/pacman/floor_pm.xpm", &vars->f_sp.px_w, &vars->f_sp.px_h);
 	if (!vars->f_sp.img)
 		map_error("Error al cargar el sprite del suelo.");
-	vars->w_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/w_sp.xpm", &vars->w_sp.px_w, &vars->w_sp.px_h);
+	vars->w_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/pacman/wall_pm.xpm", &vars->w_sp.px_w, &vars->w_sp.px_h);
 	if (!vars->w_sp.img)
 		map_error("Error al cargar el sprite de los muros.");
 	vars->s_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/s_sp.xpm", &vars->s_sp.px_w, &vars->s_sp.px_h);
