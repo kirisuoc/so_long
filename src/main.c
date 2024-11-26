@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:30:07 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/14 15:38:18 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:42:59 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int	main(int ac, char **av)
 
 int	render(t_vars *vars)
 {
-	if (vars->needs_update)
-	{
+/* 	if (vars->needs_update)
+	{ */
 		draw_background(vars);
 		if (!vars->won)
 		{
@@ -79,8 +79,8 @@ int	render(t_vars *vars)
 		{
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->yw_sp.img, (vars->map.g_w * SIZE - 150) / 2, (vars->map.g_h * SIZE - 150) / 2);
 		}
-		vars->needs_update = 0;
-	}
+//		vars->needs_update = 0;
+//	}
 
 	return (0);
 }

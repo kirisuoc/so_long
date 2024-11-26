@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:42:41 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/14 13:40:57 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:50:22 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_vars
 	int			line_length;
 	int			endian;
 	int			needs_update;
+
+	int			animation_frame;
 }				t_vars;
 
 #endif
