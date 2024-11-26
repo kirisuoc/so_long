@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:05:53 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/26 13:43:51 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:17:26 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	load_sprites(t_vars *vars)
 
 void	load_map_sprites(t_vars *vars)
 {
-	vars->p_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/extras/pikachu.xpm", &vars->p_sp.px_w, &vars->p_sp.px_h);
+	vars->p_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/final_sp/knightright.xpm", &vars->p_sp.px_w, &vars->p_sp.px_h);
 	if (!vars->p_sp.img)
 		map_error("Error al cargar el sprite de Pikachu.");
 	vars->f_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/final_sp/suelo.xpm", &vars->f_sp.px_w, &vars->f_sp.px_h);
