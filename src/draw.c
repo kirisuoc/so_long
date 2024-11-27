@@ -6,32 +6,49 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:38:02 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/14 15:26:44 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/27 10:37:24 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	draw_background(t_vars *vars)
+void draw_background(t_vars *vars)
 {
-	t_point	s;
-	t_point	e;
+    t_point s;
+    t_point e;
+    int color;
 
-	s.px_x = 0;
-	s.px_y = 0;
-	e.px_x = vars->map.g_w * SIZE;
-	e.px_y = vars->map.g_h * SIZE;
-	while (s.px_y < e.px_y)
-	{
-		while (s.px_x < e.px_x)
-		{
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->f_sp.img, s.px_x, s.px_y);
-			s.px_x += SIZE;
-		}
-		s.px_x = 0;
-		s.px_y += SIZE;
-	}
+    s.px_x = 0;
+    s.px_y = 0;
+    e.px_x = vars->map.g_w * SIZE;  // Ancho total de la ventana
+    e.px_y = vars->map.g_h * SIZE;  // Alto total de la ventana
+
+    // Obtener los datos de la imagen en memoria
+    char *img_data = vars->addr;  // Usamos 'vars->addr' ya que es el puntero a los datos de la imagen
+
+    // Recorrer cada píxel de la imagen en memoria
+    while (s.px_y < e.px_y)
+    {
+        while (s.px_x < e.px_x)
+        {
+            // Calcular el offset para acceder a los datos de la imagen en memoria
+            int offset = (s.px_y * vars->line_length) + (s.px_x * (vars->bits_per_pixel / 8));
+
+            // Obtener el color del fondo, usando la imagen de fondo
+            color = *(unsigned int *)(vars->f_sp.img +
+                                      (s.px_y % vars->f_sp.px_h) * vars->f_sp.px_w * (vars->bits_per_pixel / 8) +
+                                      (s.px_x % vars->f_sp.px_w) * (vars->bits_per_pixel / 8));
+
+            // Asignar el color al píxel en la imagen en memoria
+            *(unsigned int *)(img_data + offset) = color;
+
+            s.px_x += SIZE;
+        }
+        s.px_x = 0;
+        s.px_y += SIZE;
+    }
 }
+
 
 
 void	draw_player(t_vars *vars)

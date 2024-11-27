@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
+/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:30:07 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/26 18:42:59 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/27 11:18:33 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,24 @@ int	main(int ac, char **av)
 	// Configurar la señal SIGTSTP para manejar CTRL+Z
 	signal(SIGTSTP, handle_sigtstp);
 
+	// Comprobación de argumentos
 	if (ac == 1)
 		map_error("No se especificó ningún mapa.");
 	else if (ac > 2)
 		map_error("Demasiados argumentos.");
 	else if (ac == 2 && check_map_name(av[1]))
 		map_error("Extensión de archivo del mapa incorrecta.");
+
+	// Inicializar las variables del juego
 	init_game(&vars, av[1]);
+
+	// Procesar el mapa
 	parse_map(&vars.map);
+
+	// Llenar la cuadrícula con los elementos del juego
 	fill_grid(&vars);
+
+	// Liberar memoria (ESTÁ BIEN?)
 	free_tiles(&vars);
 
 	// Juego
@@ -44,10 +53,10 @@ int	main(int ac, char **av)
 	// Obtener la dirección de los datos de la imagen en memoria
 	vars.addr = mlx_get_data_addr(vars.img, &vars.bits_per_pixel, &vars.line_length, &vars.endian);
 
-	load_sprites(&vars);
+	/* load_sprites(&vars);
 	draw_background(&vars);
 	draw_map(&vars);
-	draw_player(&vars);
+	draw_player(&vars); */
 
 
 
@@ -71,8 +80,8 @@ int	render(t_vars *vars)
 		draw_background(vars);
 		if (!vars->won)
 		{
-			draw_map(vars);
-			draw_player(vars);
+			//draw_map(vars);
+			// draw_player(vars);
 			// draw_moves(vars);
 		}
 	 	else
@@ -81,6 +90,7 @@ int	render(t_vars *vars)
 		}
 //		vars->needs_update = 0;
 //	}
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
 
 	return (0);
 }

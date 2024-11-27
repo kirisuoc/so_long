@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:05:53 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/26 15:17:26 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:23:11 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	init_game(t_vars *vars, char *map_path)
 	vars->moves = 0;
 	vars->exit_found = 0;
 	vars->start_found = 0;
-	vars->needs_update = 0;
 
 }
 
