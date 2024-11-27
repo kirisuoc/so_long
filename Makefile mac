@@ -8,17 +8,13 @@ PRINTF_OBJ := $(PRINTF_SRC:%.c=%.o)
 
 CCFLAGS = -Wextra -Wall -Werror
 
-# Aquí estamos usando libmlx.a y las bibliotecas de OpenGL en Linux.
-# También agregamos X11 si es necesario, dependiendo de la implementación de MiniLibX.
-LIBS = -Lmlx -lmlx -lX11 -lGL -lGLU -lXext
-
 all: $(NAME)
 
-$(NAME): $(OBJ) $(GNL_OBJ) $(PRINTF_OBJ)
-	gcc $(CCFLAGS) $^ $(LIBS) -o $(NAME)
+$(NAME):$(OBJ) $(GNL_OBJ) $(PRINTF_OBJ)
+	gcc $(CCFLAGS) $^ -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 debug: $(OBJ) $(GNL_OBJ) $(PRINTF_OBJ)
-	gcc $(CCFLAGS) -fsanitize=address $^ $(LIBS) -o $(NAME)
+	gcc $(CCFLAGS) -fsanitize=address $^ -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c
 	gcc $(CCFLAGS) -Imlx -Iincludes -c $< -o $@

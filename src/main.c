@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
+/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:30:07 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/26 18:42:59 by erikcousill      ###   ########.fr       */
+/*   Updated: 2024/11/27 13:55:20 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	render(t_vars *vars)
 		}
 	 	else
 		{
+			draw_map(vars);
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->yw_sp.img, (vars->map.g_w * SIZE - 150) / 2, (vars->map.g_h * SIZE - 150) / 2);
 		}
 //		vars->needs_update = 0;
