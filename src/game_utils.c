@@ -5,64 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 11:05:53 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/26 15:17:26 by ecousill         ###   ########.fr       */
+/*   Created: 2024/11/27 11:23:59 by ecousill          #+#    #+#             */
+/*   Updated: 2024/12/02 16:44:24 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	init_game(t_vars *vars, char *map_path)
-{
-	vars->map.path = map_path;
-	vars->collected = 0;
-	vars->exit_unlocked = FALSE;
-	vars->map.exit_accessible = FALSE;
-	vars->map.accessible_collectibles = 0;
-	vars->collectibles = 0;
-	vars->won = FALSE;
-	vars->moves = 0;
-	vars->exit_found = 0;
-	vars->start_found = 0;
-	vars->needs_update = 0;
+static void	update_player_position(t_vars *vars, t_point np);
+static void	update_player_animation(t_vars *vars, int direction);
+static void	update_current_moves(t_vars *vars, t_point np);
 
+void	move_player(t_vars *vars, int new_x, int new_y, int direction)
+{
+	update_player_position(vars, (t_point){new_x, new_y});
+	update_player_animation(vars, direction);
 }
 
-void	load_sprites(t_vars *vars)
+static void	update_player_position(t_vars *vars, t_point np)
 {
-	load_map_sprites(vars);
-}
-
-void	load_map_sprites(t_vars *vars)
-{
-	vars->p_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/final_sp/knightright.xpm", &vars->p_sp.px_w, &vars->p_sp.px_h);
-	if (!vars->p_sp.img)
-		map_error("Error al cargar el sprite de Pikachu.");
-	vars->f_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/final_sp/suelo.xpm", &vars->f_sp.px_w, &vars->f_sp.px_h);
-	if (!vars->f_sp.img)
-		map_error("Error al cargar el sprite del suelo.");
-	vars->w_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/final_sp/muro.xpm", &vars->w_sp.px_w, &vars->w_sp.px_h);
-	if (!vars->w_sp.img)
-		map_error("Error al cargar el sprite de los muros.");
-	vars->s_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/s_sp.xpm", &vars->s_sp.px_w, &vars->s_sp.px_h);
-	if (!vars->s_sp.img)
-		map_error("Error al cargar el sprite de salida.");
-	vars->e_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/extras/door-close.xpm", &vars->e_sp.px_w, &vars->e_sp.px_h);
-	if (!vars->e_sp.img)
-		map_error("Error al cargar el sprite de meta.");
-	vars->c_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/final_sp/coin.xpm", &vars->c_sp.px_w, &vars->c_sp.px_h);
-	if (!vars->c_sp.img)
-		map_error("Error al cargar el sprite de los coleccionables.");
-	vars->yw_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/yw_sp.xpm", &vars->p_sp.px_w, &vars->p_sp.px_h);
-	if (!vars->yw_sp.img)
-		map_error("Error al cargar el sprite de You Win.");
-
-
-}
-
-void	update_player_position(t_vars *vars, t_point np)
-{
-	ft_printf("Total moves: %d\n", ++vars->moves);
 	if (np.px_x < vars->map.g_w && np.px_y < vars->map.g_h)
 	{
 		if (vars->map.grid[np.px_y][np.px_x] == COLLECT)
@@ -70,10 +31,7 @@ void	update_player_position(t_vars *vars, t_point np)
 			vars->collected++;
 			vars->map.grid[np.px_y][np.px_x] = FLOOR;
 			if (vars->collected == vars->collectibles)
-			{
 				vars->exit_unlocked = TRUE;
-				vars->e_sp.img = mlx_xpm_file_to_image(vars->mlx, "img/extras/door-open.xpm", &vars->f_sp.px_w, &vars->f_sp.px_h);
-			}
 			vars->player.pos = np;
 		}
 		else if (vars->map.grid[np.px_y][np.px_x] == EXIT)
@@ -88,6 +46,25 @@ void	update_player_position(t_vars *vars, t_point np)
 			vars->player.pos = np;
 		else if (vars->map.grid[np.px_y][np.px_x] == WALL)
 			vars->player.pos = vars->player.pos;
-		vars->needs_update = 1;
+		update_current_moves(vars, np);
+	}
+}
+
+static void	update_player_animation(t_vars *vars, int direction)
+{
+	if (direction == 0 || direction == 1)
+		vars->player.direction = direction;
+	vars->player.walk_frame = (vars->player.walk_frame + 1) % 2;
+}
+
+static void	update_current_moves(t_vars *vars, t_point np)
+{
+	if (np.px_x < vars->map.g_w && np.px_y < vars->map.g_h)
+	{
+		if ((vars->map.grid[np.px_y][np.px_x] == COLLECT) \
+			|| (vars->map.grid[np.px_y][np.px_x] == EXIT) \
+			|| (vars->map.grid[np.px_y][np.px_x] == START) \
+			|| (vars->map.grid[np.px_y][np.px_x] == FLOOR))
+			ft_printf("Total moves: %d\n", ++vars->moves);
 	}
 }

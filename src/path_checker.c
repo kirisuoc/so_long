@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 12:51:49 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/13 10:57:07 by ecousill         ###   ########.fr       */
+/*   Created: 2024/11/27 12:10:27 by ecousill          #+#    #+#             */
+/*   Updated: 2024/11/29 11:04:05 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "structures.h"
 
 void	check_path(t_point p, t_vars *vars)
 {
@@ -23,7 +22,6 @@ void	check_path(t_point p, t_vars *vars)
 	if (vars->map.grid[p.px_y][p.px_x] == WALL || \
 			vars->map.tiles[p.px_y][p.px_x].v == 1 || \
 			p.px_x > g_w || p.px_y > g_h)
-			/*p.px_x < 0 || p.px_y < 0*/
 		return ;
 	vars->map.tiles[p.px_y][p.px_x].v = 1;
 	if (vars->map.grid[p.px_y][p.px_x] == EXIT)

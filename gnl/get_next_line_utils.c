@@ -5,19 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 09:00:01 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 10:46:09 by erikcousill      ###   ########.fr       */
+/*   Created: 2024/10/05 14:35:16 by erikcousill       #+#    #+#             */
+/*   Updated: 2024/10/09 23:21:23 by erikcousill      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+// Funciones de ayuda que se necesitan en la función get_next_line()
 
-static size_t	ft_strlen(const char *string)
+static size_t	ft_strlen(const char *s)
 {
 	size_t	length;
 
 	length = 0;
-	while (string && string[length])
+	while (s && s[length])
 		length++;
 	return (length);
 }
@@ -28,6 +29,7 @@ char	*free_memory(char *string)
 	return (NULL);
 }
 
+// Une la nueva línea hasta el salto de línea (si lo hay) al remainder
 char	*join_strings(char *remainder, char *new_part)
 {
 	size_t	remainder_len;
@@ -57,6 +59,7 @@ char	*join_strings(char *remainder, char *new_part)
 	return (new_str);
 }
 
+// Extrae la nueva línea hasta que se encuentra el \n
 char	*extract_line(char *remainder)
 {
 	char	*string;
@@ -83,10 +86,12 @@ char	*extract_line(char *remainder)
 	return (string);
 }
 
+// Esta función debería actualizar el remainder dejando solo el resto del string
+// (desde donde se encontró el \n en extract line)
 char	*update_remainder(char *remainder)
 {
-	size_t	nl_pos;
-	size_t	i;
+	int		nl_pos;
+	int		i;
 	char	*new_remainder;
 
 	nl_pos = 0;

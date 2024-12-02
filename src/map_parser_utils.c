@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
+/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 12:06:18 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/14 21:40:16 by erikcousill      ###   ########.fr       */
+/*   Created: 2024/11/27 12:09:51 by ecousill          #+#    #+#             */
+/*   Updated: 2024/11/29 16:59:33 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "structures.h"
+
+void	map_error(char *s)
+{
+	ft_printf("Error\n");
+	ft_printf("%s\n", s);
+	exit(1);
+}
 
 void	count_grid(t_vars *vars, char c, t_point p)
 {
@@ -25,24 +31,6 @@ void	count_grid(t_vars *vars, char c, t_point p)
 		vars->exit_found++;
 	else if (c == COLLECT)
 		vars->collectibles++;
-}
-
-void	check_map(t_vars *vars)
-{
-	if (vars->exit_found <= 0)
-		map_error("Casilla de meta no encontrada.");
-	if (vars->collectibles <= 0)
-		map_error("Ningún coleccionable encontrado en el mapa.");
-	if (vars->start_found <= 0)
-		map_error("Casilla de salida no encontrada.");
-	if (!vars->map.exit_accessible)
-		map_error("No hay camino válido hasta la salida.");
-	if (vars->map.accessible_collectibles != vars->collectibles)
-		map_error("Casilla de meta no encontrada.");
-	if (vars->start_found > 1)
-		map_error("Varias casillas de salida.");
-	if (vars->exit_found > 1)
-		map_error("Varias casilla de meta.");
 }
 
 int	walls_error(t_vars *vars)

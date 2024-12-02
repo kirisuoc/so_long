@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erikcousillas <erikcousillas@student.42    +#+  +:+       +#+        */
+/*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 08:59:41 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/12 10:46:07 by erikcousill      ###   ########.fr       */
+/*   Created: 2024/10/05 14:35:13 by erikcousill       #+#    #+#             */
+/*   Updated: 2024/11/29 15:48:54 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,40 +28,42 @@ static char	*problem_reading(char *buffer, char **remainder)
 	char	*line;
 
 	free(buffer);
-	if (*remainder)
+	if (*remainder && **remainder != '\0')
 	{
 		line = extract_line(*remainder);
 		*remainder = update_remainder(*remainder);
 		return (line);
 	}
+	free(*remainder);
+	*remainder = NULL;
 	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*buffer;
-	static char	*remainder[MAX_FD];
+	static char	*remainder;
 	int			bytes_read;
 	char		*line;
 
-	if (fd < 0 || fd >= MAX_FD || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
 	bytes_read = 1;
-	while (!has_newline(remainder[fd]))
+	while (!has_newline(remainder))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read <= 0)
-			return (problem_reading(buffer, &remainder[fd]));
+			return (problem_reading(buffer, &remainder));
 		buffer[bytes_read] = '\0';
-		remainder[fd] = join_strings(remainder[fd], buffer);
-		if (!remainder[fd])
-			return (free_memory(remainder[fd]));
+		remainder = join_strings(remainder, buffer);
+		if (!remainder)
+			return (free_memory(remainder));
 	}
-	free(buffer);
-	line = extract_line(remainder[fd]);
-	remainder[fd] = update_remainder(remainder[fd]);
+	free (buffer);
+	line = extract_line(remainder);
+	remainder = update_remainder(remainder);
 	return (line);
 }

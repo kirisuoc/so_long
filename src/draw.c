@@ -5,92 +5,93 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 14:38:02 by erikcousill       #+#    #+#             */
-/*   Updated: 2024/11/14 15:26:44 by ecousill         ###   ########.fr       */
+/*   Created: 2024/11/27 12:12:10 by ecousill          #+#    #+#             */
+/*   Updated: 2024/12/01 12:52:59 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+static void	draw_exit(t_vars *vars, int x_offset, int y_offset);
+
 void	draw_background(t_vars *vars)
 {
-	t_point	s;
-	t_point	e;
+	t_point	pos;
 
-	s.px_x = 0;
-	s.px_y = 0;
-	e.px_x = vars->map.g_w * SIZE;
-	e.px_y = vars->map.g_h * SIZE;
-	while (s.px_y < e.px_y)
+	pos.px_y = 0;
+	while (pos.px_y < vars->map.g_h * SIZE)
 	{
-		while (s.px_x < e.px_x)
+		pos.px_x = 0;
+		while (pos.px_x < vars->map.g_w * SIZE)
 		{
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->f_sp.img, s.px_x, s.px_y);
-			s.px_x += SIZE;
+			draw_sprt_to_mem(vars, vars->f_sp.img_seq[0], pos.px_x, \
+				pos.px_y);
+			pos.px_x += SIZE;
 		}
-		s.px_x = 0;
-		s.px_y += SIZE;
+		pos.px_y += SIZE;
 	}
-}
-
-
-void	draw_player(t_vars *vars)
-{
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->p_sp.img, \
-			vars->player.pos.px_x * SIZE, vars->player.pos.px_y * SIZE);
 }
 
 void	draw_map(t_vars *vars)
 {
 	t_point	s;
 
-	s.px_x = 0;
 	s.px_y = 0;
 	while (s.px_y < vars->map.g_h * SIZE)
 	{
+		s.px_x = 0;
 		while (s.px_x < vars->map.g_w * SIZE)
 		{
 			if (vars->map.grid[s.px_y / SIZE][s.px_x / SIZE] == WALL)
-				put_sp(vars, s, WALL);
+				draw_sprt_to_mem(vars, vars->w_sp.img_seq[0], s.px_x, s.px_y);
 			else if (vars->map.grid[s.px_y / SIZE][s.px_x / SIZE] == COLLECT)
-				put_sp(vars, s, COLLECT);
+				draw_sprt_to_mem(vars, vars->c_sp.img_seq[0], s.px_x, s.px_y);
 			else if (vars->map.grid[s.px_y / SIZE][s.px_x / SIZE] == START)
-				put_sp(vars, s, START);
+				draw_sprt_to_mem(vars, vars->s_sp.img_seq[0], s.px_x, s.px_y);
 			else if (vars->map.grid[s.px_y / SIZE][s.px_x / SIZE] == EXIT)
-				put_sp(vars, s, EXIT);
+				draw_exit(vars, s.px_x, s.px_y);
 			else if (vars->map.grid[s.px_y / SIZE][s.px_x / SIZE] == FLOOR)
-				put_sp(vars, s, FLOOR);
+				draw_sprt_to_mem(vars, vars->f_sp.img_seq[0], s.px_x, s.px_y);
 			s.px_x += SIZE;
 		}
-		s.px_x = 0;
 		s.px_y += SIZE;
 	}
 }
 
-void	put_sp(t_vars *vars, t_point s, char t)
+static void	draw_exit(t_vars *vars, int x_offset, int y_offset)
 {
-
-	if (t == WALL)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->w_sp.img, s.px_x, s.px_y);
-	else if (t == COLLECT)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->c_sp.img, s.px_x, s.px_y);
-	else if (t == START)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->s_sp.img, s.px_x, s.px_y);
-	else if (t == EXIT)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->e_sp.img, s.px_x, s.px_y);
-	else if (t == FLOOR)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->f_sp.img, s.px_x, s.px_y);
+	if (vars->collected < vars->collectibles)
+		draw_sprt_to_mem(vars, vars->e_sp.img_seq[0], x_offset, y_offset);
+	else
+		draw_sprt_to_mem(vars, vars->e_sp.img_seq[1], x_offset, y_offset);
 }
 
-/* void	draw_moves(t_vars *vars)
+void	draw_player(t_vars *vars)
 {
-	int	h;
-	int	t;
-	int	u;
+	static int	frame = 0;
+	int			x_offset;
+	int			y_offset;
 
-	h = (vars->moves / 100);
-	t = (vars->moves / 10) % 10;
-	u = ((vars->moves % 100) % 10);
+	x_offset = vars->player.pos.px_x * SIZE;
+	y_offset = vars->player.pos.px_y * SIZE;
+	if (vars->player.direction == 1)
+		frame = vars->player.walk_frame;
+	else if (vars->player.direction == 0)
+		frame = vars->player.walk_frame + 2;
+	draw_sprt_to_mem(vars, vars->player.sprite.img_seq[frame], \
+		x_offset, y_offset);
+}
 
-	// Terminar
-} */
+void	draw_victory(t_vars *vars)
+{
+	int	victory_width;
+	int	victory_height;
+	int	x_offset;
+	int	y_offset;
+
+	victory_width = 150;
+	victory_height = 150;
+	x_offset = (vars->map.g_w * SIZE - victory_width) / 2;
+	y_offset = (vars->map.g_h * SIZE - victory_height) / 2;
+	draw_sprt_to_mem(vars, vars->yw_sp.img_seq[0], x_offset, y_offset);
+}

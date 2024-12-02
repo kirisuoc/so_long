@@ -6,7 +6,7 @@
 /*   By: ecousill <ecousill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:54:55 by ecousill          #+#    #+#             */
-/*   Updated: 2024/11/26 15:15:16 by ecousill         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:40:44 by ecousill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define WIN_W 500
 # define WIN_H 500
-# define WIN_NAME "so_long"
+# define WIN_NAME "Catch The Coin"
 # define WALL '1'
 # define FLOOR '0'
 # define START 'P'
@@ -24,10 +24,8 @@
 # ifndef SIZE
 #  define SIZE 50
 # endif
-# define BOOL short int
 # define TRUE 1
 # define FALSE 0
-
 # include "mlx.h"
 # include "libftprintf.h"
 # include "get_next_line.h"
@@ -39,51 +37,56 @@
 # include <stdio.h>
 # include <signal.h>
 
-// main.c
-int	render(t_vars *vars);
+// game_utils.c
+void	move_player(t_vars *vars, int new_x, int new_y, int direction);
 
-// utils.c
-int		close_window(t_vars *vars);
-int 	key_handler(int keycode, t_vars *vars);
-size_t	ft_linelen(char *s);
-int		check_map_name(char *s);
+// init_game.c
+void	init_game(t_vars *vars, char *map_path);
+void	init_graphics(t_vars *vars);
 
-// valid_map.c
-void	map_is_valid(char **map);
-
-// parse_map.c
-void	map_error(char *s);
-int		parse_map(t_map *map);
-int		fill_grid(t_vars *vars);
-void	fill_tiles(t_vars *vars, char *line, t_point g_pos);
-void	allocate_line(t_vars *vars, t_point g_pos);
+// map_parser.c
+void	parse_map(t_map *map);
+void	fill_grid(t_vars *vars);
 
 // map_parser_utils.c
+void	map_error(char *s);
 void	count_grid(t_vars *vars, char c, t_point p);
-void	check_map(t_vars *vars);
 int		walls_error(t_vars *vars);
 int		unknown_character(int c);
 void	initiate_map_filling(t_vars *vars, t_point *p);
 
+// free.c
+void	free_tiles(t_vars *vars);
+void	free_map(t_vars *vars);
+void	free_graphics(t_vars *vars);
+void	free_sprites(t_vars *vars);
+
+// validate_map.c
+void	validate_map(t_vars *vars);
+
 // path_checker.c
 void	check_path(t_point p, t_vars *vars);
 
-// free_tiles.c
-void	free_tiles(t_vars *vars);
-void	free_map(t_vars *vars);
+// utils.c
+int		close_window(t_vars *vars);
+size_t	ft_linelen(char *s);
+int		check_map_name(char *s);
 
-// game_utils.c
-void	init_game(t_vars *vars, char *map_path);
-int		load_sprite(t_vars *vars, t_sprite *sprite, char *file_path);
-void	update_player_position(t_vars *vars, t_point np);
+// sprites_utils.c
+void	load_sprites(t_vars *vars);
 
-// draw_background.c
+// draw.c
 void	draw_background(t_vars *vars);
 void	draw_map(t_vars *vars);
 void	draw_player(t_vars *vars);
-void	put_sp(t_vars *vars, t_point s, char t);
-void	load_map_sprites(t_vars *vars);
-void	load_sprites(t_vars *vars);
+void	draw_victory(t_vars *vars);
+void	draw_counter(t_vars *vars);
 
+// draw_utils.c
+void	draw_sprt_to_mem(t_vars *vars, void *sprite_img, int x_offset, \
+		int y_offset);
+
+// keys.c
+int		key_handler(int keycode, t_vars *vars);
 
 #endif
