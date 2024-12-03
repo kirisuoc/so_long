@@ -40,11 +40,11 @@ El mapa debe estar formado por los siguientes caracteres:
 - `P` - Posición inicial del jugador.
 
 **Ejemplo de un mapa válido**:
-1111111111111
-10010000000C1
-1000011111001
-1P0011E000001
-1111111111111
+1111111111111  
+10010000000C1  
+1000011111001  
+1P0011E000001  
+1111111111111  
 
 ### Requisitos
 - **MiniLibX**: Se debe utilizar la librería **MiniLibX** para manejar gráficos y eventos.
