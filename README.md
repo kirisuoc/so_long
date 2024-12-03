@@ -39,7 +39,7 @@ El mapa debe estar formado por los siguientes caracteres:
 - `E` - Salida.
 - `P` - Posición inicial del jugador.
 
-**Ejemplo de un mapa válido**:
+**Ejemplo de un mapa válido**:  
 1111111111111  
 10010000000C1  
 1000011111001  
